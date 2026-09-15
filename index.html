@@ -1,0 +1,1491 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Story of the Bean: Finance Lens</title>
+  <link rel="icon" href="data:,">
+  <style>
+    :root {
+      --asu-maroon: #8c1d40;
+      --asu-gold: #ffc627;
+      --asu-black: #191919;
+      --asu-gray-2: #484848;
+      --asu-gray: #747474;
+      --asu-gray-4: #bfbfbf;
+      --asu-gray-5: #d0d0d0;
+      --asu-gray-6: #e8e8e8;
+      --asu-gray-7: #fafafa;
+      --asu-white: #ffffff;
+      --asu-blue-dark: #00658b;
+      --asu-green-dark: #3f6811;
+      --focus: #005ea8;
+      --danger: #a71930;
+      --soft-gold: #fff7dc;
+      --soft-maroon: #fbedf2;
+      --soft-blue: #eaf7fc;
+      --soft-green: #edf7e8;
+      --line: #d0d0d0;
+    }
+
+    #fin-activity,
+    #fin-activity * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: #f5f5f5;
+      color: var(--asu-black);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.55;
+    }
+
+    #fin-activity .skip-link {
+      position: absolute;
+      left: 12px;
+      top: -60px;
+      z-index: 100;
+      padding: 10px 14px;
+      border-radius: 4px;
+      background: var(--asu-gold);
+      color: var(--asu-black);
+      font-weight: 700;
+    }
+
+    #fin-activity .skip-link:focus {
+      top: 12px;
+      outline: 3px solid var(--asu-white);
+      outline-offset: 2px;
+    }
+
+    #fin-activity .course-header {
+      border-bottom: 8px solid var(--asu-gold);
+      background: var(--asu-maroon);
+      color: var(--asu-white);
+    }
+
+    #fin-activity .header-inner,
+    #fin-activity main {
+      width: min(1180px, 100%);
+      margin: 0 auto;
+    }
+
+    #fin-activity .header-inner {
+      padding: 30px clamp(18px, 4vw, 48px);
+    }
+
+    #fin-activity .eyebrow {
+      display: inline-block;
+      margin: 0 0 10px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: var(--asu-gold);
+      color: var(--asu-black);
+      font-size: .82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    #fin-activity h1 {
+      margin: 0;
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    #fin-activity .course-header p:last-child {
+      margin: 12px 0 0;
+      font-size: 1.05rem;
+    }
+
+    #fin-activity main {
+      padding: 24px clamp(14px, 3vw, 32px) 52px;
+    }
+
+    #fin-activity h2 {
+      margin: 0 0 10px;
+      color: var(--asu-maroon);
+      font-size: clamp(1.45rem, 2.2vw, 1.9rem);
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+
+    #fin-activity h3 {
+      margin: 22px 0 8px;
+      color: var(--asu-black);
+      font-size: 1.2rem;
+      line-height: 1.25;
+      letter-spacing: 0;
+    }
+
+    #fin-activity h4 {
+      margin: 0 0 6px;
+      color: var(--asu-black);
+      font-size: 1rem;
+      letter-spacing: 0;
+    }
+
+    #fin-activity p {
+      margin: 0 0 12px;
+    }
+
+    #fin-activity ul,
+    #fin-activity ol {
+      margin: 0 0 16px;
+      padding-left: 25px;
+    }
+
+    #fin-activity li + li {
+      margin-top: 7px;
+    }
+
+    #fin-activity a {
+      color: var(--asu-blue-dark);
+      font-weight: 700;
+    }
+
+    #fin-activity button,
+    #fin-activity select,
+    #fin-activity textarea,
+    #fin-activity input {
+      font: inherit;
+    }
+
+    #fin-activity button,
+    #fin-activity select,
+    #fin-activity textarea,
+    #fin-activity input[type="radio"] {
+      scroll-margin: 90px;
+    }
+
+    #fin-activity button:focus-visible,
+    #fin-activity select:focus-visible,
+    #fin-activity textarea:focus-visible,
+    #fin-activity input:focus-visible,
+    #fin-activity [tabindex="0"]:focus-visible {
+      outline: 3px solid var(--focus);
+      outline-offset: 3px;
+    }
+
+    #fin-activity .activity-intro {
+      margin-bottom: 18px;
+      padding: 20px 24px;
+      border: 1px solid var(--line);
+      border-left: 8px solid var(--asu-gold);
+      border-radius: 8px;
+      background: var(--asu-white);
+    }
+
+    #fin-activity .scoring-note {
+      margin-top: 12px;
+      padding: 11px 13px;
+      border: 1px solid #e8cf7a;
+      border-radius: 5px;
+      background: var(--soft-gold);
+    }
+
+    #fin-activity .tab-list {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      gap: 0 8px;
+      border-bottom: 3px solid var(--line);
+    }
+
+    #fin-activity .tab-button {
+      min-height: 52px;
+      margin: 0 0 -3px;
+      padding: 12px 14px;
+      border: 2px solid transparent;
+      border-bottom: 3px solid var(--line);
+      border-radius: 7px 7px 0 0;
+      background: var(--asu-gray-6);
+      color: var(--asu-black);
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    #fin-activity .tab-button:hover {
+      background: var(--asu-gray-5);
+    }
+
+    #fin-activity .tab-button[aria-selected="true"] {
+      border-color: var(--asu-maroon);
+      border-bottom-color: var(--asu-maroon);
+      background: var(--asu-maroon);
+      color: var(--asu-white);
+    }
+
+    #fin-activity .tab-panel {
+      padding: clamp(22px, 4vw, 42px);
+      border: 2px solid var(--line);
+      border-top: 0;
+      background: var(--asu-white);
+    }
+
+    #fin-activity .callout,
+    #fin-activity .ai-note,
+    #fin-activity .evidence-note,
+    #fin-activity .optional-box {
+      margin: 18px 0;
+      padding: 16px 18px;
+      border-radius: 6px;
+    }
+
+    #fin-activity .callout {
+      border-left: 7px solid var(--asu-gold);
+      background: var(--soft-gold);
+    }
+
+    #fin-activity .ai-note {
+      border-left: 7px solid var(--asu-blue-dark);
+      background: var(--soft-blue);
+    }
+
+    #fin-activity .evidence-note {
+      border-left: 7px solid var(--asu-maroon);
+      background: var(--soft-maroon);
+    }
+
+    #fin-activity .optional-box {
+      border: 2px solid var(--line);
+      background: var(--asu-gray-7);
+    }
+
+    #fin-activity .artifact-heading {
+      margin-top: 30px;
+      padding-top: 16px;
+      border-top: 5px solid var(--asu-gold);
+    }
+
+    #fin-activity .table-wrap {
+      max-width: 100%;
+      margin: 14px 0 22px;
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      background: var(--asu-white);
+    }
+
+    #fin-activity table {
+      width: 100%;
+      min-width: 680px;
+      border-collapse: collapse;
+    }
+
+    #fin-activity th,
+    #fin-activity td {
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      vertical-align: top;
+      text-align: left;
+    }
+
+    #fin-activity th {
+      background: var(--asu-gray-6);
+      font-weight: 700;
+    }
+
+    #fin-activity .function-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin: 18px 0 24px;
+    }
+
+    #fin-activity .function-item {
+      min-height: 165px;
+      padding: 15px;
+      border: 1px solid var(--line);
+      border-top: 6px solid var(--asu-maroon);
+      background: var(--asu-gray-7);
+    }
+
+    #fin-activity .function-item:nth-child(even) {
+      border-top-color: var(--asu-gold);
+    }
+
+    #fin-activity .function-number {
+      display: block;
+      color: var(--asu-maroon);
+      font-size: 1.4rem;
+      font-weight: 700;
+    }
+
+    #fin-activity .control-steps {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      grid-auto-rows: 1fr;
+      gap: 10px;
+      align-items: stretch;
+      margin: 18px 0 24px;
+      padding: 0;
+      list-style: none;
+      counter-reset: control-step;
+    }
+
+    #fin-activity .control-steps li {
+      height: 100%;
+      margin-top: 0;
+      min-height: 145px;
+      padding: 13px;
+      border: 1px solid var(--line);
+      background: var(--asu-white);
+      counter-increment: control-step;
+    }
+
+    #fin-activity .control-steps li::before {
+      display: block;
+      width: 31px;
+      height: 31px;
+      margin-bottom: 8px;
+      border-radius: 50%;
+      background: var(--asu-gold);
+      color: var(--asu-black);
+      content: counter(control-step);
+      font-weight: 700;
+      line-height: 31px;
+      text-align: center;
+    }
+
+    #fin-activity .research-list,
+    #fin-activity .path-list {
+      margin: 16px 0 24px;
+      padding-left: 24px;
+      list-style: disc;
+    }
+
+    #fin-activity .research-list li,
+    #fin-activity .path-list li {
+      padding: 11px 0 11px 4px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    #fin-activity .research-list li::marker,
+    #fin-activity .path-list li::marker {
+      color: var(--asu-maroon);
+      font-size: 1.15em;
+    }
+
+    #fin-activity .path-list li::marker {
+      color: var(--asu-black);
+    }
+
+    #fin-activity .message-thread {
+      margin: 16px 0 24px;
+      padding: 0;
+      list-style: none;
+    }
+
+    #fin-activity .message-thread li {
+      display: grid;
+      grid-template-columns: minmax(115px, 170px) minmax(0, 1fr);
+      gap: 14px;
+      margin: 0;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    #fin-activity .speaker {
+      color: var(--asu-maroon);
+      font-weight: 700;
+    }
+
+    #fin-activity .match-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin: 16px 0 22px;
+    }
+
+    #fin-activity .match-row {
+      padding: 14px;
+      border: 1px solid var(--line);
+      background: var(--asu-gray-7);
+    }
+
+    #fin-activity .match-row label,
+    #fin-activity .optional-box label {
+      display: block;
+      margin-bottom: 7px;
+      font-weight: 700;
+    }
+
+    #fin-activity select,
+    #fin-activity textarea {
+      width: 100%;
+      min-height: 46px;
+      padding: 9px 11px;
+      border: 2px solid var(--asu-gray);
+      border-radius: 4px;
+      background: var(--asu-white);
+      color: var(--asu-black);
+    }
+
+    #fin-activity textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    #fin-activity .question-card {
+      margin: 18px 0;
+      padding: 18px;
+      border: 2px solid var(--line);
+      border-radius: 7px;
+      background: var(--asu-white);
+    }
+
+    #fin-activity fieldset {
+      margin: 0;
+      padding: 0;
+      border: 0;
+    }
+
+    #fin-activity legend {
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+
+    #fin-activity .choice-row {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      gap: 10px;
+      align-items: start;
+      margin: 9px 0;
+      padding: 10px;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      background: var(--asu-gray-7);
+      cursor: pointer;
+    }
+
+    #fin-activity .choice-row:hover {
+      background: var(--soft-gold);
+    }
+
+    #fin-activity input[type="radio"] {
+      width: 20px;
+      height: 20px;
+      margin-top: 2px;
+      accent-color: var(--asu-maroon);
+    }
+
+    #fin-activity .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    #fin-activity button {
+      min-height: 46px;
+      padding: 10px 16px;
+      border: 2px solid var(--asu-maroon);
+      border-radius: 5px;
+      background: var(--asu-maroon);
+      color: var(--asu-white);
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    #fin-activity button:hover:not(:disabled) {
+      background: #6f1733;
+    }
+
+    #fin-activity button:disabled {
+      border-color: var(--asu-gray-4);
+      background: var(--asu-gray-6);
+      color: var(--asu-gray-2);
+      cursor: not-allowed;
+    }
+
+    #fin-activity .secondary-button {
+      border-color: var(--asu-gray-2);
+      background: var(--asu-gray-2);
+    }
+
+    #fin-activity .secondary-button:hover:not(:disabled) {
+      background: var(--asu-black);
+    }
+
+    #fin-activity .submit-button {
+      min-height: 52px;
+      box-shadow: 0 0 0 4px var(--asu-gold);
+      font-size: 1.05rem;
+    }
+
+    #fin-activity .error-message,
+    #fin-activity .feedback,
+    #fin-activity .submission-status {
+      margin-top: 16px;
+      padding: 13px 15px;
+      border-radius: 5px;
+    }
+
+    #fin-activity .error-message {
+      border-left: 7px solid var(--danger);
+      background: #fff3f3;
+    }
+
+    #fin-activity .feedback {
+      border-left: 7px solid var(--asu-blue-dark);
+      background: var(--soft-blue);
+    }
+
+    #fin-activity .feedback strong {
+      color: var(--asu-black);
+    }
+
+    #fin-activity .completion-controls {
+      margin-top: 24px;
+      padding: 17px;
+      border: 2px solid var(--asu-maroon);
+      border-radius: 7px;
+      background: var(--soft-maroon);
+    }
+
+    #fin-activity .score-summary {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin: 18px 0;
+    }
+
+    #fin-activity .summary-item {
+      padding: 14px;
+      border-left: 6px solid var(--asu-gold);
+      background: var(--soft-gold);
+    }
+
+    #fin-activity .summary-item strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--asu-maroon);
+      font-size: 1.25rem;
+    }
+
+    #fin-activity .submission-status {
+      border-left: 7px solid var(--asu-blue-dark);
+      background: var(--soft-blue);
+    }
+
+    #fin-activity .submission-status.success {
+      border-left-color: var(--asu-green-dark);
+      background: var(--soft-green);
+    }
+
+    #fin-activity .print-takeaway {
+      display: none;
+    }
+
+    @media (max-width: 930px) {
+      #fin-activity .function-grid,
+      #fin-activity .control-steps {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      #fin-activity .score-summary {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 680px) {
+      #fin-activity .tab-list,
+      #fin-activity .controls {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+
+      #fin-activity .tab-button {
+        width: 100%;
+        margin: 0;
+        border: 2px solid transparent;
+        border-radius: 6px;
+        text-align: left;
+      }
+
+      #fin-activity .tab-panel {
+        margin-top: 8px;
+        border-top: 2px solid var(--line);
+        border-radius: 7px;
+      }
+
+      #fin-activity .function-grid,
+      #fin-activity .control-steps,
+      #fin-activity .match-grid {
+        grid-template-columns: 1fr;
+      }
+
+      #fin-activity .message-thread li {
+        grid-template-columns: 1fr;
+        gap: 4px;
+      }
+
+      #fin-activity .controls button,
+      #fin-activity .submit-button,
+      #fin-activity .secondary-button {
+        width: 100%;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      #fin-activity *,
+      #fin-activity *::before,
+      #fin-activity *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+      }
+    }
+
+    @media print {
+      @page {
+        margin: .65in;
+      }
+
+      #fin-activity .skip-link,
+      #fin-activity .course-header,
+      #fin-activity main {
+        display: none !important;
+      }
+
+      body {
+        background: var(--asu-white);
+      }
+
+      #fin-activity .print-takeaway {
+        display: block;
+        color: var(--asu-black);
+        font-size: 11pt;
+      }
+
+      #fin-activity .print-takeaway h1 {
+        padding-bottom: 10px;
+        border-bottom: 4px solid var(--asu-gold);
+        color: var(--asu-maroon);
+        font-size: 24pt;
+      }
+
+      #fin-activity .print-takeaway h2 {
+        margin-top: 22px;
+        color: var(--asu-maroon);
+        font-size: 15pt;
+      }
+
+      #fin-activity .print-summary {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+        margin: 18px 0;
+      }
+
+      #fin-activity .print-summary div {
+        padding: 10px;
+        border: 1px solid var(--asu-gray-4);
+      }
+
+      #fin-activity .print-summary strong {
+        display: block;
+        margin-bottom: 3px;
+      }
+
+      #fin-activity .print-results {
+        columns: 2;
+        column-gap: 28px;
+      }
+
+      #fin-activity .print-results li {
+        break-inside: avoid;
+        margin-bottom: 7px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="fin-activity">
+    <a class="skip-link" href="#fin-main">Skip to main content</a>
+
+    <header class="course-header">
+      <div class="header-inner">
+        <p class="eyebrow">WPC 150 Case Segment</p>
+        <h1>The Story of the Bean: Finance Lens</h1>
+        <p>Examine whether Copper Cup's proposed traceability investment creates value, how it could be funded, and who bears the risk.</p>
+      </div>
+    </header>
+
+    <main id="fin-main">
+      <section class="activity-intro" aria-labelledby="activity-heading">
+        <h2 id="activity-heading">How This Chapter Works</h2>
+        <p>Read the case tabs, inspect the financial evidence, and complete all 10 objective checks. You may revise your work before the required Canvas submission step.</p>
+        <div class="scoring-note">
+          <strong>Canvas scoring:</strong> Ten evidence-based finance decisions are worth 10 points each. Your funding recommendation and safeguard are optional and unscored.
+        </div>
+      </section>
+
+      <nav class="tab-list" role="tablist" aria-label="Finance case sections">
+        <button class="tab-button" id="tab-handoff" type="button" role="tab" aria-selected="true" aria-controls="panel-handoff">Case Context</button>
+        <button class="tab-button" id="tab-narrative" type="button" role="tab" aria-selected="false" aria-controls="panel-narrative" tabindex="-1">FIN Narrative</button>
+        <button class="tab-button" id="tab-functions" type="button" role="tab" aria-selected="false" aria-controls="panel-functions" tabindex="-1">Value Over Time</button>
+        <button class="tab-button" id="tab-people" type="button" role="tab" aria-selected="false" aria-controls="panel-people" tabindex="-1">Risk &amp; Governance</button>
+        <button class="tab-button" id="tab-paths" type="button" role="tab" aria-selected="false" aria-controls="panel-paths" tabindex="-1">Paths &amp; Research</button>
+        <button class="tab-button" id="tab-decision" type="button" role="tab" aria-selected="false" aria-controls="panel-decision" tabindex="-1">Investment Decision</button>
+        <button class="tab-button" id="tab-practice" type="button" role="tab" aria-selected="false" aria-controls="panel-practice" tabindex="-1">Practice</button>
+        <button class="tab-button" id="tab-submit" type="button" role="tab" aria-selected="false" aria-controls="panel-submit" tabindex="-1" hidden>Submit</button>
+      </nav>
+
+      <article class="tab-panel" id="panel-handoff" role="tabpanel" tabindex="0" aria-labelledby="tab-handoff">
+        <h2>Case Context</h2>
+        <p>Copper Cup Coffee is considering a three-year traceability system for its featured coffee. The system would connect lot records, supplier documents, and customer-facing information. Owner Elena Torres has not approved the project or chosen how to fund it. This finance case begins with that open decision.</p>
+        <p>The system is an intangible investment: customers cannot hold the software or records, but the system may improve verification, reduce information gaps, and support a differentiated product. Those possible benefits still have to justify the cash committed today.</p>
+
+        <div class="evidence-note">
+          <h3>Investment Estimate</h3>
+          <p>The full system costs <strong>$9,500 today</strong>. Maya estimates net incremental cash benefits of <strong>$3,800 in Year 1</strong>, <strong>$4,200 in Year 2</strong>, and <strong>$4,600 in Year 3</strong>. The project team proposes an 8% discount rate for the base analysis.</p>
+        </div>
+
+        <div class="evidence-note">
+          <h3>Funding Estimate</h3>
+          <p>Copper Cup has <strong>$18,000 in available cash reserves</strong>. It could pay cash or borrow $9,500 through a three-year loan at 9% with equal annual payments. A smaller pilot is also available for $5,000 today.</p>
+        </div>
+
+        <p>All figures are fictional, simplified, and stated before taxes. They are estimates for learning, not promises. The base case excludes financing cash flows so that the project itself can be valued separately from the choice of how to pay for it.</p>
+
+        <div class="callout">
+          <p><strong>Finance decision:</strong> Does the traceability project create value at the proposed discount rate, what risks could change that conclusion, and which funding approach best fits Copper Cup's liquidity needs?</p>
+        </div>
+
+        <div class="ai-note">
+          <h3>AI at Work: Building a First-Pass Model</h3>
+          <p>Maya can use AI to draft formulas, organize scenarios, or explain a model. She still has to verify every input, timing assumption, formula, and source. A polished forecast is not evidence that the cash flows will occur.</p>
+        </div>
+      </article>
+
+      <article class="tab-panel" id="panel-narrative" role="tabpanel" tabindex="0" aria-labelledby="tab-narrative" hidden>
+        <h2>Finance: When the Bean Becomes an Investment</h2>
+        <p>A coffee bean moves through farms, processors, exporters, importers, roasters, and cafes. At every stage, someone commits money now in the hope of receiving benefits later. Finance examines those investment and financing decisions, the markets and institutions that connect savers with users of capital, and the risks borne by each participant.</p>
+        <p>For Copper Cup, the first question is an <strong>investment decision</strong>: should the business commit resources to the traceability system? The second is a <strong>financing decision</strong>: if it invests, should it use cash, debt, or a smaller staged commitment? Keeping the questions separate prevents a common modeling error. The analyst first values the project's operating cash flows, then compares funding choices and their effects on liquidity, risk, and control.</p>
+        <p>Finance uses cash flows rather than accounting labels because cash is what a business can reinvest, distribute, or use to meet obligations. Maya identifies the incremental cash benefits expected only if Copper Cup adopts the system. Existing cafe sales do not become project benefits merely because they appear in the same forecast.</p>
+
+        <p>The time value of money changes how those benefits are compared:</p>
+        <div class="callout">
+          <p><strong>A dollar today is worth more than a dollar received later because today's dollar can earn a return and future cash flows are uncertain.</strong></p>
+        </div>
+        <p>Maya discounts each future benefit at 8%. The $4,600 expected in Year 3 is worth about $3,652 today. Across all three years, the estimated present value of benefits is about $10,771. Subtracting the $9,500 initial cost produces a base-case net present value, or NPV, of about <strong>+$1,271</strong>.</p>
+        <p>A positive NPV means the estimated benefits exceed the initial cost after accounting for the proposed required return. It does not mean the project is guaranteed to succeed. The conclusion depends on the accuracy of the cash flows, timing, project life, and discount rate.</p>
+        <p>That distinction matters because risk is uncertainty about future outcomes. If verification savings, customer response, or operating efficiencies are weaker than estimated, Copper Cup may receive less cash than expected. In a downside scenario, benefits fall to $2,500, $2,800, and $3,000. At 8%, the NPV becomes about <strong>-$2,403</strong>.</p>
+        <p>Investors generally require a higher expected return for bearing more risk. Diversification can reduce exposure to risks specific to one company, project, region, or asset, but it cannot eliminate broad market risk. For Copper Cup, a portfolio concept becomes a managerial lesson: do not let one hopeful project consume all available liquidity or assume every uncertainty can be diversified away.</p>
+        <p>Funding also changes the business's exposure. Paying $9,500 in cash avoids interest but reduces the reserve from $18,000 to $8,500. Borrowing preserves cash at closing but creates required annual payments of about $3,753 and total interest of about $1,759. Those financing costs should be evaluated explicitly, not quietly added to operating cash flows after the project has already been discounted.</p>
+        <p>The goal of financial management is commonly framed as increasing the value of the firm. For Copper Cup, that means choosing projects expected to create value while recognizing contracts, reputation, employees, suppliers, customers, and the risks that can erode future cash flows. Stakeholder effects belong in the analysis when they affect expected cash flows, risk, or the firm's ability to operate responsibly over time.</p>
+        <p>Governance protects that process. Elena owns the business, but Maya may build the model and a vendor may supply the estimates. Incentives, optimism, or selective evidence can create agency conflicts. Internal controls, independent review, clear approval authority, and transparent assumptions help align decisions with the owner's objectives.</p>
+        <p>Behavioral finance adds another warning. People may cling to an investment because they dislike admitting a loss, favor information that supports a preferred story, follow market sentiment, or overlook evidence because attention is limited. Maya proposes a written decision rule:</p>
+        <div class="evidence-note">
+          <p><strong>Approve only if the base-case NPV remains positive after an independent formula check, the downside is survivable, liquidity remains adequate, and the evidence behind material sustainability claims can be verified.</strong></p>
+        </div>
+        <p>Environmental, social, and governance information can be financially relevant when it changes costs, revenue, legal exposure, access to capital, or risk. Climate finance applies valuation under uncertainty to long-lived environmental risks and investments. The finance discipline does not permit Maya to treat a sustainability label as an automatic financial benefit. She has to identify the mechanism, estimate the cash-flow effect, test the uncertainty, and disclose what remains unknown.</p>
+      </article>
+
+      <article class="tab-panel" id="panel-functions" role="tabpanel" tabindex="0" aria-labelledby="tab-functions" hidden>
+        <h2>Value Over Time</h2>
+        <p>Finance translates cash flows that occur at different times into comparable values. Copper Cup's model uses end-of-year cash flows and an 8% annual discount rate.</p>
+
+        <div class="function-grid" aria-label="Four time value of money concepts">
+          <section class="function-item">
+            <span class="function-number">1</span>
+            <h3>Future Value</h3>
+            <p>Moves money forward in time by compounding at a stated rate.</p>
+          </section>
+          <section class="function-item">
+            <span class="function-number">2</span>
+            <h3>Present Value</h3>
+            <p>Moves a future cash flow back to today's equivalent by discounting.</p>
+          </section>
+          <section class="function-item">
+            <span class="function-number">3</span>
+            <h3>Discount Rate</h3>
+            <p>Represents the return required for time and the risk being evaluated.</p>
+          </section>
+          <section class="function-item">
+            <span class="function-number">4</span>
+            <h3>Net Present Value</h3>
+            <p>Subtracts the initial investment from the present value of future net cash flows.</p>
+          </section>
+        </div>
+
+        <div class="callout">
+          <p><strong>Present value:</strong> PV = CF<sub>t</sub> / (1 + r)<sup>t</sup></p>
+          <p><strong>Net present value:</strong> NPV = -Initial investment + sum of discounted future net cash flows</p>
+        </div>
+
+        <h3 class="artifact-heading">Artifact: Maya's Discounted Cash-Flow Worksheet</h3>
+        <div class="table-wrap" role="region" aria-label="Copper Cup discounted cash-flow worksheet" tabindex="0">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Time</th>
+                <th scope="col">Net Cash Flow</th>
+                <th scope="col">Discount Factor at 8%</th>
+                <th scope="col">Present Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Today</td>
+                <td>-$9,500</td>
+                <td>1.0000</td>
+                <td>-$9,500</td>
+              </tr>
+              <tr>
+                <td>Year 1</td>
+                <td>$3,800</td>
+                <td>0.925926</td>
+                <td>$3,518.52</td>
+              </tr>
+              <tr>
+                <td>Year 2</td>
+                <td>$4,200</td>
+                <td>0.857339</td>
+                <td>$3,600.82</td>
+              </tr>
+              <tr>
+                <td>Year 3</td>
+                <td>$4,600</td>
+                <td>0.793832</td>
+                <td>$3,651.63</td>
+              </tr>
+              <tr>
+                <td colspan="3"><strong>Present value of benefits</strong></td>
+                <td><strong>$10,770.97</strong></td>
+              </tr>
+              <tr>
+                <td colspan="3"><strong>Base-case NPV</strong></td>
+                <td><strong>+$1,270.97</strong></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Five Checks Before Trusting the NPV</h3>
+        <ol class="control-steps">
+          <li><strong>Use incremental cash flows.</strong><br>Include only changes caused by the project.</li>
+          <li><strong>Place cash flows correctly.</strong><br>State when each amount occurs.</li>
+          <li><strong>Match rate and timing.</strong><br>Use consistent annual or periodic units.</li>
+          <li><strong>Test uncertainty.</strong><br>Change material assumptions and recalculate.</li>
+          <li><strong>Audit the model.</strong><br>Trace formulas, inputs, sources, and rounding.</li>
+        </ol>
+
+        <h3 class="artifact-heading">Scenario Evidence</h3>
+        <div class="table-wrap" role="region" aria-label="Traceability investment scenario comparison" tabindex="0">
+          <table>
+            <thead><tr><th scope="col">Scenario</th><th scope="col">Initial Cost</th><th scope="col">Year 1-3 Benefits</th><th scope="col">NPV at 8%</th></tr></thead>
+            <tbody>
+              <tr><td>Full system, base case</td><td>$9,500</td><td>$3,800; $4,200; $4,600</td><td>+$1,271</td></tr>
+              <tr><td>Full system, downside</td><td>$9,500</td><td>$2,500; $2,800; $3,000</td><td>-$2,403</td></tr>
+              <tr><td>Smaller pilot</td><td>$5,000</td><td>$2,000; $2,300; $2,500</td><td>+$808</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="evidence-note">
+          <h3>Financing Evidence</h3>
+          <p>A $9,500, three-year loan at 9% with equal annual payments requires about $3,753 per year. Total payments are about $11,259, including about $1,759 of interest. Paying cash avoids that interest but leaves $8,500 in reserves; paying cash for the pilot leaves $13,000.</p>
+        </div>
+
+        <div class="ai-note">
+          <h3>AI at Work: Formula Auditor, Not Final Authority</h3>
+          <p>AI can produce a second calculation or identify inconsistent assumptions. Maya should independently recompute key values, inspect cell references, compare results with a financial calculator, and document any difference instead of accepting the most confident explanation.</p>
+        </div>
+      </article>
+
+      <article class="tab-panel" id="panel-people" role="tabpanel" tabindex="0" aria-labelledby="tab-people" hidden>
+        <h2>Risk, Return, and Governance</h2>
+        <p>Risk is uncertainty about what will occur. Finance makes uncertainty visible through scenarios, sensitivity analysis, required returns, portfolio thinking, and governance controls.</p>
+
+        <div class="function-grid" aria-label="Four finance risk lenses">
+          <section class="function-item"><span class="function-number">1</span><h3>Operating Risk</h3><p>Benefits may fall if adoption, savings, data quality, or execution disappoints.</p></section>
+          <section class="function-item"><span class="function-number">2</span><h3>Financial Risk</h3><p>Debt creates fixed payments even when project cash flows are weak.</p></section>
+          <section class="function-item"><span class="function-number">3</span><h3>Liquidity Risk</h3><p>Using cash may leave too little flexibility for payroll, repairs, or shocks.</p></section>
+          <section class="function-item"><span class="function-number">4</span><h3>Information Risk</h3><p>Incomplete, biased, or unverified inputs can make a precise model misleading.</p></section>
+        </div>
+
+        <h3 class="artifact-heading">Artifact: Copper Cup Risk Register</h3>
+        <div class="table-wrap" role="region" aria-label="Copper Cup finance risk register" tabindex="0">
+          <table>
+            <thead><tr><th scope="col">Uncertainty</th><th scope="col">Financial Effect</th><th scope="col">Evidence or Control</th><th scope="col">Decision Response</th></tr></thead>
+            <tbody>
+              <tr><td>Customer response is weaker than forecast.</td><td>Lower incremental revenue and negative NPV.</td><td>Test volumes and repeat purchases with a defined pilot.</td><td>Stage the investment or stop before full scale.</td></tr>
+              <tr><td>Vendor implementation costs rise.</td><td>Higher initial outlay and lower NPV.</td><td>Fixed-price terms, scope definitions, and contingency analysis.</td><td>Renegotiate, reduce scope, or update the model.</td></tr>
+              <tr><td>Traceability evidence is incomplete.</td><td>Lower benefit, reputational exposure, or corrective cost.</td><td>Source documents, audit trail, and claim approval control.</td><td>Remove unsupported benefits and revise claims.</td></tr>
+              <tr><td>Cafe cash needs increase unexpectedly.</td><td>Liquidity pressure or emergency borrowing.</td><td>Minimum reserve threshold and rolling cash forecast.</td><td>Use a pilot, preserve cash, or delay commitment.</td></tr>
+              <tr><td>Loan payments outlast project benefits.</td><td>Fixed obligations without offsetting cash inflow.</td><td>Downside debt-service analysis and contract review.</td><td>Reduce borrowing or reject the funding structure.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout">
+          <h3>Diversification Has Limits</h3>
+          <p>An investor can combine assets whose outcomes do not move together, reducing company-specific risk. Broad economic or market shocks remain. Copper Cup cannot call this single project diversified; it can limit concentration by preserving liquidity, staging exposure, and avoiding dependence on one estimate or vendor.</p>
+        </div>
+
+        <h3>Agency and Behavioral Safeguards</h3>
+        <p>An agency conflict can arise when the person recommending a project benefits from approval but does not bear the full cost of failure. Governance uses incentives, oversight, approval rights, disclosure, and monitoring to align the decision. Copper Cup can require a second reviewer to trace formulas and sources, document who approved assumptions, and set post-investment checkpoints.</p>
+        <p>Behavioral safeguards address predictable judgment errors. A prewritten stop rule helps counter the disposition effect, or the tendency to hold a losing investment too long. Base and downside cases counter overconfidence. A dissenting review challenges confirmation bias. Scheduled evidence reviews help when limited attention causes decision makers to overlook changes.</p>
+
+        <div class="evidence-note">
+          <h3>ESG and Climate Evidence</h3>
+          <p>Environmental, social, and governance factors belong in an investment model when evidence connects them to cash flows or risk. A climate disruption may affect supply reliability, costs, and asset values. A governance weakness may reduce confidence in records. The analyst should estimate the mechanism and uncertainty rather than assign automatic value to an ESG label.</p>
+        </div>
+
+        <div class="ai-note">
+          <h3>AI at Work: Challenge the Forecast</h3>
+          <p>AI can generate adverse scenarios, compare risk disclosures, or surface assumptions that deserve testing. Maya must check source quality, recency, omitted variables, and invented citations. Sensitive company or supplier data should be handled only in approved systems.</p>
+        </div>
+      </article>
+
+      <article class="tab-panel" id="panel-paths" role="tabpanel" tabindex="0" aria-labelledby="tab-paths" hidden>
+        <h2>Finance in Action</h2>
+        <p>Finance connects investment, funding, valuation, risk, markets, and financial decision-making. Students learn to turn uncertain evidence into defensible recommendations and communicate what a model can and cannot establish.</p>
+        <p>The Department of Finance describes a dual mission: educate students and create knowledge that advances the field. Research-active faculty, experienced teaching faculty, industry relationships, and applied student programs connect those two responsibilities.</p>
+
+        <h3>Current Undergraduate Pathways</h3>
+        <ul class="path-list">
+          <li><strong>Finance BS:</strong> Corporate finance, investment analysis, markets, valuation, and financial decision-making.</li>
+          <li><strong>Financial Planning BA:</strong> Household financial goals, advising, risk management, tax, retirement, and estate considerations.</li>
+          <li><strong>Financial Technology BS:</strong> Finance, data, computing, digital platforms, and technology-enabled financial services.</li>
+          <li><strong>Real Estate and Applied Finance BS:</strong> Valuation, development, investment, lending, and applied financial analysis.</li>
+          <li><strong>Additional options:</strong> Students can explore the real estate minor and the Essentials of Credit and Leasing certificate.</li>
+        </ul>
+        <div class="callout">
+          <p><strong>Explore the majors:</strong> Visit the <a href="https://wpcarey.asu.edu/finance-degrees/undergraduate" target="_blank" rel="noopener">Department of Finance undergraduate programs</a> to confirm current degrees, requirements, and next steps.</p>
+        </div>
+
+        <h3>Research That Changes Practice</h3>
+        <ul class="research-list">
+          <li><strong>Behavioral finance:</strong> Denis Sosyura examines how sentiment, attention, affinity, overconfidence, and loss aversion affect financial decisions.</li>
+          <li><strong>ESG investing:</strong> Jeff Mindlin considers how material environmental, social, and governance information enters an investment process grounded in risk, return, and fiduciary responsibility.</li>
+          <li><strong>Climate finance:</strong> Mike Barnett applies valuation, markets, policy, and uncertainty to climate-related investment and risk.</li>
+          <li><strong>Market efficiency:</strong> Seth Pruitt studies how information enters prices and what that means for active and passive investment strategies.</li>
+          <li><strong>Investments and diversification:</strong> George Aragon examines risk, expected return, asset pricing, and portfolio choices.</li>
+        </ul>
+
+        <h3>Skills, Careers, and Ways to Participate</h3>
+        <p>Students build financial modeling, valuation, risk analysis, spreadsheet discipline, data interpretation, research, judgment, and communication. Alumni examples in the course content connect those skills to capital budgeting, sensitivity analysis, real estate, corporate finance, wealth management, and global financial work.</p>
+        <p>Rima Reddy emphasizes technical modeling, sensitivity analysis, and explaining results. Sung Ko connects finance with global problem-solving. Dallas Tanner describes evaluating capital expenditures, debt and equity choices, NPV, and real-estate investments. Their paths differ, but each depends on disciplined analysis and clear communication.</p>
+        <ul>
+          <li>Participate in the Student Investment Management or undergraduate investment fund experiences when eligible.</li>
+          <li>Explore the Investment Banking Industry Scholars program and related honors opportunities.</li>
+          <li>Join the Financial Management Association or Investment Banking and Finance Club.</li>
+          <li>Use internships, career coaching, alumni conversations, and applied projects to test finance interests.</li>
+        </ul>
+        <p>Explore <a href="https://wpcarey.asu.edu/finance-degrees/careers" target="_blank" rel="noopener">finance careers and professional development</a> for current examples and resources.</p>
+
+        <div class="ai-note">
+          <h3>AI at Work: Exploring a Path</h3>
+          <p>Students can ask AI to compare role descriptions, identify transferable skills, or draft informational-interview questions. They should verify program requirements and labor-market claims with official sources, then use coursework, clubs, internships, projects, and conversations as real evidence of fit.</p>
+        </div>
+      </article>
+
+      <article class="tab-panel" id="panel-decision" role="tabpanel" tabindex="0" aria-labelledby="tab-decision" hidden>
+        <h2>Investment and Financing Decision</h2>
+        <p>Elena has three defensible paths to compare. None is automatically correct without a minimum-liquidity requirement, confidence in the estimates, and a clear view of downside tolerance.</p>
+
+        <h3>Option A: Full System, Paid With Cash</h3>
+        <p><strong>Financial evidence:</strong> Base-case project NPV is about +$1,271; no loan interest is incurred; cash reserves fall from $18,000 to $8,500.</p>
+        <p><strong>Decision tension:</strong> Copper Cup captures the full estimated benefit but gives up more financial flexibility today.</p>
+
+        <h3>Option B: Full System, Funded With Debt</h3>
+        <p><strong>Financial evidence:</strong> The same operating project is evaluated separately; financing requires about $3,753 annually for three years and about $1,759 total interest.</p>
+        <p><strong>Decision tension:</strong> Cash is preserved initially, but fixed payments increase financial risk when benefits are uncertain.</p>
+
+        <h3>Option C: Smaller Pilot, Paid With Cash</h3>
+        <p><strong>Financial evidence:</strong> Pilot NPV is about +$808; initial cost is $5,000; cash reserves remain at $13,000.</p>
+        <p><strong>Decision tension:</strong> Copper Cup preserves liquidity and buys information, but may delay or forgo some full-system benefits.</p>
+
+        <div class="callout">
+          <h3>Case Prompt</h3>
+          <p>Recommend one funding path only after stating the minimum cash reserve, the most decision-sensitive assumption, and a governance safeguard. Explain how your recommendation changes if the downside scenario becomes more likely.</p>
+        </div>
+
+        <div class="ai-note">
+          <h3>AI at Work: Draft the Investment Memo</h3>
+          <p>AI can turn the reviewed analysis into a concise decision memo with assumptions, scenarios, and unresolved questions. Elena should require links to source evidence, recalculate every headline figure, and keep the human decision maker accountable for the recommendation.</p>
+        </div>
+      </article>
+
+      <article class="tab-panel" id="panel-practice" role="tabpanel" tabindex="0" aria-labelledby="tab-practice" hidden>
+        <h2>Interactive Practice</h2>
+        <p>Complete all 10 finance decisions, then select <strong>Check My Finance Reading</strong>. You may revise and check again before submitting to Canvas.</p>
+
+        <form id="practice-form" novalidate>
+          <section class="question-card" data-question="role" data-correct="separate"><h3>1. Separate the Decisions</h3><fieldset><legend>How should Maya structure the first financial analysis?</legend>
+            <label class="choice-row"><input type="radio" name="role" value="mix" required> Combine project benefits, loan interest, and reserves into one undiscounted total.</label>
+            <label class="choice-row"><input type="radio" name="role" value="separate"> Value operating cash flows first, then compare cash and debt funding.</label>
+            <label class="choice-row"><input type="radio" name="role" value="sales"> Compare projected sales with cost and ignore timing, risk, and financing.</label>
+          </fieldset></section>
+
+          <section class="question-card" data-question="pv" data-correct="discounted"><h3>2. Discount a Future Benefit</h3><fieldset><legend>What is the approximate present value of $4,600 received in Year 3 at 8%?</legend>
+            <label class="choice-row"><input type="radio" name="pv" value="nominal" required> About $4,600, because the stated amount remains unchanged through Year 3.</label>
+            <label class="choice-row"><input type="radio" name="pv" value="discounted"> About $3,652, because the future amount is discounted for three years.</label>
+            <label class="choice-row"><input type="radio" name="pv" value="compounded"> About $5,794, because the future benefit should be compounded to today.</label>
+          </fieldset></section>
+
+          <section class="question-card" data-question="npv" data-correct="positive"><h3>3. Calculate the Base-Case NPV</h3><fieldset><legend>Which result matches the full-system base case at 8%, allowing for rounding?</legend>
+            <label class="choice-row"><input type="radio" name="npv" value="negative" required> Approximately -$1,271 after subtracting discounted benefits from the initial project cost.</label>
+            <label class="choice-row"><input type="radio" name="npv" value="gross"> Approximately +$3,100 after adding nominal benefits and ignoring the time value.</label>
+            <label class="choice-row"><input type="radio" name="npv" value="positive"> Approximately +$1,271 after discounting benefits and subtracting the initial investment.</label>
+          </fieldset></section>
+
+          <section class="question-card" data-question="interpret" data-correct="conditional"><h3>4. Interpret Positive NPV</h3><fieldset><legend>What does the positive base-case NPV support?</legend>
+            <label class="choice-row"><input type="radio" name="interpret" value="guarantee" required> The project guarantees profit because every future estimate exceeds the initial cost.</label>
+            <label class="choice-row"><input type="radio" name="interpret" value="conditional"> Estimated benefits exceed cost at 8%, conditional on the model assumptions.</label>
+            <label class="choice-row"><input type="radio" name="interpret" value="funding"> Debt is preferable because positive NPV automatically covers every loan payment.</label>
+          </fieldset></section>
+
+          <section class="question-card" data-question="financing" data-correct="liquidity"><h3>5. Compare Cash and Debt</h3><fieldset><legend>Which comparison best reflects Copper Cup's financing tradeoff?</legend>
+            <label class="choice-row"><input type="radio" name="financing" value="free" required> Debt preserves cash and removes risk because payments occur in later years.</label>
+            <label class="choice-row"><input type="radio" name="financing" value="same"> Cash and debt are equivalent because both provide the same traceability system.</label>
+            <label class="choice-row"><input type="radio" name="financing" value="liquidity"> Cash avoids interest; debt preserves liquidity but creates fixed payment obligations.</label>
+          </fieldset></section>
+
+          <section class="question-card" data-question="riskreturn" data-correct="compensation"><h3>6. Connect Risk and Return</h3><fieldset><legend>Why might a riskier project require a higher expected return?</legend>
+            <label class="choice-row"><input type="radio" name="riskreturn" value="compensation" required> Investors generally require compensation for bearing greater uncertainty about future outcomes.</label>
+            <label class="choice-row"><input type="radio" name="riskreturn" value="certainty"> Higher risk makes projected cash flows more certain and therefore more valuable.</label>
+            <label class="choice-row"><input type="radio" name="riskreturn" value="accounting"> Accounting rules require every uncertain project to report higher future benefits.</label>
+          </fieldset></section>
+
+          <section class="question-card" data-question="diversification" data-correct="limits"><h3>7. Apply Diversification</h3><fieldset><legend>Which statement correctly describes diversification?</legend>
+            <label class="choice-row"><input type="radio" name="diversification" value="eliminate" required> Combining assets eliminates all company, market, inflation, and economic uncertainty.</label>
+            <label class="choice-row"><input type="radio" name="diversification" value="single"> One well-researched traceability project creates a diversified business investment portfolio.</label>
+            <label class="choice-row"><input type="radio" name="diversification" value="limits"> It can reduce project-specific exposure, but broad market risk still remains.</label>
+          </fieldset></section>
+
+          <section class="question-card" data-question="governance" data-correct="oversight"><h3>8. Add a Governance Control</h3><fieldset><legend>Which safeguard best addresses agency and model risk?</legend>
+            <label class="choice-row"><input type="radio" name="governance" value="vendor" required> Let the vendor approve assumptions because it understands the system best.</label>
+            <label class="choice-row"><input type="radio" name="governance" value="oversight"> Require independent formula review, documented assumptions, approval rights, and checkpoints.</label>
+            <label class="choice-row"><input type="radio" name="governance" value="confidence"> Approve the forecast when its author expresses strong confidence in every estimate.</label>
+          </fieldset></section>
+
+          <section class="question-card" data-question="behavior" data-correct="rules"><h3>9. Reduce Behavioral Bias</h3><fieldset><legend>Which practice best counters overconfidence and the disposition effect?</legend>
+            <label class="choice-row"><input type="radio" name="behavior" value="story" required> Focus on the strongest success story and revisit losses after implementation ends.</label>
+            <label class="choice-row"><input type="radio" name="behavior" value="rules"> Set downside scenarios, dissenting review, and stop rules before approving investment.</label>
+            <label class="choice-row"><input type="radio" name="behavior" value="sentiment"> Follow market sentiment because collective enthusiasm removes individual judgment errors.</label>
+          </fieldset></section>
+
+          <section class="question-card" data-question="evidence" data-correct="verify"><h3>10. Audit ESG, Climate, and AI Evidence</h3><fieldset><legend>How should Maya use these inputs in the finance memo?</legend>
+            <label class="choice-row"><input type="radio" name="evidence" value="premium" required> Add an automatic sustainability premium because ESG language signals higher value.</label>
+            <label class="choice-row"><input type="radio" name="evidence" value="ignore"> Exclude climate and governance factors because they are always nonfinancial concerns.</label>
+            <label class="choice-row"><input type="radio" name="evidence" value="verify"> Link material factors to cash flow or risk, verify sources, and disclose uncertainty.</label>
+          </fieldset></section>
+
+          <div class="optional-box">
+            <h3>Optional Take-Away Notes</h3>
+            <p><strong><em>Not scored.</em></strong> These responses stay in your browser and are included when you print or save your take-away as a PDF.</p>
+            <label for="funding-recommendation">Which funding path would you recommend?</label>
+            <select id="funding-recommendation" name="fundingRecommendation">
+              <option value="">Select a funding path</option>
+              <option value="Full system, paid with cash">Full system, paid with cash</option>
+              <option value="Full system, funded with debt">Full system, funded with debt</option>
+              <option value="Smaller pilot, paid with cash">Smaller pilot, paid with cash</option>
+            </select>
+            <label for="safeguard-note">Assumption or safeguard</label>
+            <textarea id="safeguard-note" name="safeguardNote" placeholder="Name one assumption to monitor or one safeguard to require."></textarea>
+          </div>
+
+          <div id="form-error" class="error-message" role="alert" tabindex="-1" hidden></div>
+          <div class="controls">
+            <button id="check-practice" type="submit">Check My Finance Reading</button>
+            <button class="secondary-button" id="reset-practice" type="button">Reset</button>
+          </div>
+        </form>
+
+        <section id="practice-feedback" class="feedback" aria-live="polite" tabindex="-1" hidden>
+          <h3>Finance Feedback</h3>
+          <p id="score-line"></p>
+          <div id="feedback-list"></div>
+        </section>
+
+        <div class="completion-controls" id="completion-controls">
+          <h3>Review and Submit</h3>
+          <p id="completion-message">Complete all 10 objective checks to activate the Canvas review and submission step.</p>
+          <button id="review-submit" type="button" disabled>Review and Submit to Canvas</button>
+        </div>
+      </article>
+
+      <article class="tab-panel" id="panel-submit" role="tabpanel" tabindex="0" aria-labelledby="tab-submit" hidden>
+        <h2>Required Final Step: Submit Your Score to Canvas</h2>
+        <p>Your objective checks are complete. Review the summary and then select the submission button. Your score is not sent automatically.</p>
+
+        <div class="score-summary" aria-label="Completion summary">
+          <div class="summary-item">
+            <strong id="final-score">0/100</strong>
+            Current objective score
+          </div>
+          <div class="summary-item">
+            <strong>10/10</strong>
+            Objective checks complete
+          </div>
+          <div class="summary-item">
+            <strong>Unscored</strong>
+            Recommendation and safeguard
+          </div>
+        </div>
+
+        <div class="callout">
+          <h3>Finance Takeaway</h3>
+          <p>A financial decision separates investment from financing, discounts incremental cash flows, tests uncertainty, protects liquidity, and uses governance to challenge assumptions and bias.</p>
+          <p><strong>Your funding recommendation:</strong> <span id="selected-recommendation">No funding path selected.</span></p>
+          <p><strong>Your assumption or safeguard:</strong> <span id="safeguard-summary">No note entered.</span></p>
+        </div>
+
+        <button class="submit-button" id="submit-score" type="button">Submit Score to Canvas</button>
+        <button class="secondary-button" id="print-takeaway-button" type="button">Print to PDF</button>
+
+        <div class="submission-status" id="submission-status" role="status" aria-live="polite">Score not yet submitted.</div>
+      </article>
+    </main>
+
+    <section class="print-takeaway" id="print-takeaway" aria-label="Printable finance take-away">
+      <p><strong>WPC 150</strong></p>
+      <h1>The Story of the Bean: Finance Take-Away</h1>
+
+      <div class="print-summary">
+        <div><strong id="print-score">0 out of 100</strong>Objective score</div>
+        <div><strong id="print-checked">0 of 10</strong>Objective checks</div>
+        <div><strong id="print-submission">Not confirmed</strong>Canvas submission</div>
+      </div>
+
+      <h2>Key Takeaway</h2>
+      <p>A financial decision separates investment from financing, discounts incremental cash flows, tests uncertainty, protects liquidity, and uses governance to challenge assumptions and bias.</p>
+
+      <h2>Your Optional Notes</h2>
+      <p><strong>Funding recommendation:</strong> <span id="print-recommendation">No funding path selected.</span></p>
+      <p><strong>Assumption or safeguard:</strong> <span id="print-safeguard">No note entered.</span></p>
+
+      <h2>Objective Results</h2>
+      <ol class="print-results" id="print-results"></ol>
+    </section>
+  </div>
+
+  <script>
+    (function () {
+      "use strict";
+
+      const activity = document.getElementById("fin-activity");
+      const tabs = Array.from(activity.querySelectorAll('[role="tab"]'));
+      const panels = Array.from(activity.querySelectorAll('[role="tabpanel"]'));
+
+      function visibleTabs() {
+        return tabs.filter(tab => !tab.hidden);
+      }
+
+      function activateTab(tab, moveFocus) {
+        if (!tab || tab.hidden) return;
+        tabs.forEach(item => {
+          const selected = item === tab;
+          item.setAttribute("aria-selected", selected ? "true" : "false");
+          item.tabIndex = selected ? 0 : -1;
+        });
+        panels.forEach(panel => {
+          panel.hidden = panel.id !== tab.getAttribute("aria-controls");
+        });
+        if (moveFocus) tab.focus();
+      }
+
+      tabs.forEach(tab => {
+        tab.addEventListener("click", () => activateTab(tab, false));
+        tab.addEventListener("keydown", event => {
+          const available = visibleTabs();
+          const index = available.indexOf(tab);
+          let nextIndex = null;
+          if (event.key === "ArrowRight") nextIndex = (index + 1) % available.length;
+          if (event.key === "ArrowLeft") nextIndex = (index - 1 + available.length) % available.length;
+          if (event.key === "Home") nextIndex = 0;
+          if (event.key === "End") nextIndex = available.length - 1;
+          if (nextIndex !== null) {
+            event.preventDefault();
+            activateTab(available[nextIndex], true);
+          }
+        });
+      });
+
+      let scormAPI = null;
+      let scormInitialized = false;
+      let scoreSubmitted = false;
+
+      function findAPI(startWindow) {
+        let current = startWindow;
+        let attempts = 0;
+        while (current && attempts < 8) {
+          try {
+            if (current.API) return current.API;
+            if (current.parent === current) break;
+            current = current.parent;
+          } catch (error) {
+            break;
+          }
+          attempts += 1;
+        }
+        return null;
+      }
+
+      function scormInit() {
+        scormAPI = findAPI(window) || (window.opener ? findAPI(window.opener) : null);
+        if (!scormAPI) return false;
+        const initialized = scormAPI.LMSInitialize("");
+        scormInitialized = initialized === true || initialized === "true";
+        if (!scormInitialized) return false;
+        const status = scormAPI.LMSGetValue("cmi.core.lesson_status");
+        if (!status || status === "not attempted") {
+          scormAPI.LMSSetValue("cmi.core.lesson_status", "incomplete");
+          scormAPI.LMSCommit("");
+        }
+        return true;
+      }
+
+      function submitToCanvas(score) {
+        if (!scormInitialized || !scormAPI) {
+          return { sent: false, message: `Local preview: your score is ${score} out of 100, but no Canvas SCORM connection was found.` };
+        }
+        scormAPI.LMSSetValue("cmi.core.score.min", "0");
+        scormAPI.LMSSetValue("cmi.core.score.max", "100");
+        scormAPI.LMSSetValue("cmi.core.score.raw", String(score));
+        scormAPI.LMSSetValue("cmi.core.lesson_status", "completed");
+        const committed = scormAPI.LMSCommit("");
+        const sent = committed === true || committed === "true";
+        return sent
+          ? { sent: true, message: `Score submitted to Canvas: ${score} out of 100.` }
+          : { sent: false, message: `Canvas did not confirm the submission. Your current score is ${score} out of 100; please try again.` };
+      }
+
+      window.addEventListener("load", scormInit);
+      window.addEventListener("beforeunload", () => {
+        if (scormInitialized && scormAPI) scormAPI.LMSFinish("");
+      });
+
+      const form = document.getElementById("practice-form");
+      const formError = document.getElementById("form-error");
+      const practiceFeedback = document.getElementById("practice-feedback");
+      const scoreLine = document.getElementById("score-line");
+      const feedbackList = document.getElementById("feedback-list");
+      const completionMessage = document.getElementById("completion-message");
+      const reviewSubmitButton = document.getElementById("review-submit");
+      const submitTab = document.getElementById("tab-submit");
+      const submitButton = document.getElementById("submit-score");
+      const submissionStatus = document.getElementById("submission-status");
+      const finalScore = document.getElementById("final-score");
+      const checkButton = document.getElementById("check-practice");
+      const resetButton = document.getElementById("reset-practice");
+      let currentScore = 0;
+      let practiceChecked = false;
+
+      const decisionKeys = ["role", "pv", "npv", "interpret", "financing", "riskreturn", "diversification", "governance", "behavior", "evidence"];
+      const decisionTitles = {
+        role: "Investment and financing decisions",
+        pv: "Present value",
+        npv: "Net present value",
+        interpret: "NPV interpretation",
+        financing: "Cash and debt",
+        riskreturn: "Risk and expected return",
+        diversification: "Diversification",
+        governance: "Governance",
+        behavior: "Behavioral finance",
+        evidence: "ESG, climate, and AI evidence"
+      };
+      const feedbackMessages = {
+        role: {
+          correct: "The project should be valued from operating cash flows before funding alternatives are compared.",
+          incorrect: "Mixing funding and operating effects can double count costs or hide the project's underlying economics."
+        },
+        pv: {
+          correct: "$4,600 divided by 1.08 cubed is approximately $3,652 in present-value terms.",
+          incorrect: "Present value discounts the Year 3 amount; it does not leave it unchanged or compound it forward."
+        },
+        npv: {
+          correct: "Discounted benefits total about $10,771, producing an NPV near +$1,271 after the initial cost.",
+          incorrect: "NPV subtracts the initial investment from discounted, incremental future cash flows."
+        },
+        interpret: {
+          correct: "Positive NPV supports investment only under the stated cash-flow, timing, rate, and project-life assumptions.",
+          incorrect: "A positive base-case NPV is conditional evidence, not a guarantee or an automatic funding decision."
+        },
+        financing: {
+          correct: "Cash avoids interest but reduces reserves; debt preserves initial liquidity while adding fixed obligations.",
+          incorrect: "The same asset does not make funding choices equivalent, and delayed payments still create risk."
+        },
+        riskreturn: {
+          correct: "A higher expected return compensates investors for accepting greater uncertainty, although realized return may differ.",
+          incorrect: "Risk does not create certainty or require forecasts to show higher accounting benefits."
+        },
+        diversification: {
+          correct: "Diversification can reduce company-specific exposure, but systematic market risk remains.",
+          incorrect: "One project is not a diversified portfolio, and diversification cannot eliminate broad economic risks."
+        },
+        governance: {
+          correct: "Independent review and documented authority make assumptions traceable and reduce agency and model risk.",
+          incorrect: "Vendor expertise and personal confidence do not replace independent oversight or documented evidence."
+        },
+        behavior: {
+          correct: "Precommitted scenarios, dissent, and stop rules counter overconfidence and reluctance to recognize losses.",
+          incorrect: "Selective stories and market enthusiasm can reinforce the very biases the process should challenge."
+        },
+        evidence: {
+          correct: "Material ESG or climate factors require a defensible cash-flow or risk mechanism, verified sources, and uncertainty disclosure.",
+          incorrect: "Neither automatic premiums nor blanket exclusion is financially disciplined; AI output also requires verification."
+        }
+      };
+
+      function selectedRadio(name) {
+        return form.querySelector(`input[name="${name}"]:checked`);
+      }
+
+      function missingFields() {
+        return decisionKeys
+          .filter(name => !selectedRadio(name))
+          .map(name => `decision ${decisionKeys.indexOf(name) + 1}`);
+      }
+
+      function decisionResults() {
+        return decisionKeys.map(name => {
+          const card = form.querySelector(`[data-question="${name}"]`);
+          const selected = selectedRadio(name);
+          return {
+            name,
+            title: decisionTitles[name],
+            correct: Boolean(selected && selected.value === card.dataset.correct)
+          };
+        });
+      }
+
+      function updateOptionalSummary() {
+        const recommendation = document.getElementById("funding-recommendation").value || "No funding path selected.";
+        const safeguard = document.getElementById("safeguard-note").value.trim() || "No note entered.";
+        document.getElementById("selected-recommendation").textContent = recommendation;
+        document.getElementById("safeguard-summary").textContent = safeguard;
+      }
+
+      function invalidatePractice() {
+        if (!practiceChecked || scoreSubmitted) return;
+        practiceChecked = false;
+        currentScore = 0;
+        practiceFeedback.hidden = true;
+        feedbackList.replaceChildren();
+        reviewSubmitButton.disabled = true;
+        submitTab.hidden = true;
+        finalScore.textContent = "0/100";
+        completionMessage.textContent = "Complete all 10 objective checks to activate the Canvas review and submission step.";
+        submissionStatus.textContent = "Score not yet submitted.";
+        submissionStatus.className = "submission-status";
+        if (submitTab.getAttribute("aria-selected") === "true") {
+          activateTab(document.getElementById("tab-practice"), false);
+        }
+      }
+
+      const objectiveControls = Array.from(form.querySelectorAll('.question-card input[type="radio"]'));
+      objectiveControls.forEach(control => control.addEventListener("change", invalidatePractice));
+
+      form.addEventListener("submit", event => {
+        event.preventDefault();
+        const missing = missingFields();
+        if (missing.length) {
+          formError.textContent = `Please complete: ${missing.join(", ")}.`;
+          formError.hidden = false;
+          formError.focus();
+          return;
+        }
+
+        formError.hidden = true;
+        feedbackList.replaceChildren();
+        const decisions = decisionResults();
+        currentScore = decisions.filter(result => result.correct).length * 10;
+        practiceChecked = true;
+
+        decisions.forEach(result => {
+          const paragraph = document.createElement("p");
+          paragraph.innerHTML = `<strong>${result.title}:</strong> ${feedbackMessages[result.name][result.correct ? "correct" : "incorrect"]}`;
+          feedbackList.appendChild(paragraph);
+        });
+
+        scoreLine.innerHTML = `<strong>Practice score: ${currentScore} out of 100.</strong> This score has not been submitted to Canvas.`;
+        finalScore.textContent = `${currentScore}/100`;
+        practiceFeedback.hidden = false;
+        reviewSubmitButton.disabled = false;
+        submitTab.hidden = false;
+        completionMessage.innerHTML = `All 10 objective checks are complete. Your current score is <strong><span id="practice-score">${currentScore}</span> out of 100</strong>. Review your results before completing the required Canvas submission step.`;
+        updateOptionalSummary();
+        practiceFeedback.focus();
+      });
+
+      reviewSubmitButton.addEventListener("click", () => {
+        if (!practiceChecked) return;
+        updateOptionalSummary();
+        activateTab(submitTab, true);
+        document.getElementById("panel-submit").scrollIntoView({ block: "start" });
+      });
+
+      submitButton.addEventListener("click", () => {
+        if (!practiceChecked) return;
+        const result = submitToCanvas(currentScore);
+        submissionStatus.textContent = result.message;
+        submissionStatus.className = `submission-status${result.sent ? " success" : ""}`;
+        scoreSubmitted = result.sent;
+        if (result.sent) {
+          submitButton.disabled = true;
+          submitButton.textContent = "Score Submitted to Canvas";
+          objectiveControls.forEach(control => { control.disabled = true; });
+          checkButton.disabled = true;
+          resetButton.disabled = true;
+        }
+      });
+
+      resetButton.addEventListener("click", () => {
+        form.reset();
+        practiceChecked = false;
+        currentScore = 0;
+        formError.hidden = true;
+        practiceFeedback.hidden = true;
+        feedbackList.replaceChildren();
+        reviewSubmitButton.disabled = true;
+        submitTab.hidden = true;
+        finalScore.textContent = "0/100";
+        completionMessage.textContent = "Complete all 10 objective checks to activate the Canvas review and submission step.";
+        submissionStatus.textContent = "Score not yet submitted.";
+        submissionStatus.className = "submission-status";
+      });
+
+      function preparePrintTakeaway() {
+        const recommendation = document.getElementById("funding-recommendation").value || "No funding path selected.";
+        const safeguard = document.getElementById("safeguard-note").value.trim() || "No note entered.";
+        document.getElementById("print-score").textContent = `${currentScore} out of 100`;
+        document.getElementById("print-checked").textContent = practiceChecked ? "10 of 10" : "0 of 10";
+        document.getElementById("print-submission").textContent = scoreSubmitted ? "Confirmed" : "Not confirmed";
+        document.getElementById("print-recommendation").textContent = recommendation;
+        document.getElementById("print-safeguard").textContent = safeguard;
+
+        const results = decisionResults();
+        const printResults = document.getElementById("print-results");
+        printResults.replaceChildren();
+        results.forEach(result => {
+          const item = document.createElement("li");
+          item.textContent = `${result.title}: ${practiceChecked ? (result.correct ? "Correct" : "Review recommended") : "Not checked"}`;
+          printResults.appendChild(item);
+        });
+      }
+
+      document.getElementById("print-takeaway-button").addEventListener("click", () => {
+        preparePrintTakeaway();
+        window.print();
+      });
+
+      window.addEventListener("beforeprint", preparePrintTakeaway);
+    }());
+  </script>
+</body>
+</html>
