@@ -701,6 +701,82 @@
       background: var(--soft-gold);
     }
 
+    #fin-activity .classification-activity {
+      margin: 28px 0;
+      padding-top: 20px;
+      border-top: 5px solid var(--asu-gold);
+    }
+
+    #fin-activity .classification-row {
+      margin: 14px 0;
+      padding: 16px;
+      border: 2px solid var(--line);
+      border-radius: 6px;
+      background: var(--asu-gray-7);
+    }
+
+    #fin-activity .classification-row.is-correct {
+      border-color: var(--asu-green-dark);
+      background: var(--soft-green);
+    }
+
+    #fin-activity .classification-row.needs-review {
+      border-color: var(--danger);
+      background: #fff3f3;
+    }
+
+    #fin-activity .classification-row legend {
+      width: 100%;
+      margin-bottom: 12px;
+      font-size: 1.05rem;
+    }
+
+    #fin-activity .category-options {
+      display: grid;
+      gap: 10px;
+    }
+
+    #fin-activity .category-options.two-options {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    #fin-activity .category-options.three-options {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    #fin-activity .category-option {
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+      min-height: 52px;
+      padding: 11px 12px;
+      border: 2px solid var(--asu-gray);
+      border-radius: 5px;
+      background: var(--asu-white);
+      cursor: pointer;
+    }
+
+    #fin-activity .category-option:hover {
+      background: var(--soft-gold);
+    }
+
+    #fin-activity .category-option:has(input:checked) {
+      border-color: var(--asu-black);
+      background: var(--asu-gold);
+      color: var(--asu-black);
+    }
+
+    #fin-activity .category-option input {
+      flex: 0 0 auto;
+    }
+
+    #fin-activity .item-feedback {
+      margin: 12px 0 0;
+      padding: 10px 12px;
+      border-left: 5px solid var(--asu-blue-dark);
+      background: var(--asu-white);
+    }
+
     #fin-activity input[type="radio"] {
       width: 20px;
       height: 20px;
@@ -874,6 +950,11 @@
         grid-template-columns: 1fr;
       }
 
+      #fin-activity .category-options.two-options,
+      #fin-activity .category-options.three-options {
+        grid-template-columns: 1fr;
+      }
+
       #fin-activity .finance-chart {
         min-height: 285px;
       }
@@ -982,9 +1063,9 @@
     <main id="fin-main">
       <section class="activity-intro" aria-labelledby="activity-heading">
         <h2 id="activity-heading">How This Chapter Works</h2>
-        <p>Read the case tabs, inspect the financial evidence, and complete all 10 objective checks. You may revise your work before the required Canvas submission step.</p>
+        <p>Read the case tabs, inspect the financial evidence, and complete all 10 objective checks on the <strong>Decision</strong> tab. You may revise your work before the required Canvas submission step.</p>
         <div class="scoring-note">
-          <strong>Canvas scoring:</strong> Ten evidence-based finance decisions are worth 10 points each. Your funding recommendation and safeguard are optional and unscored.
+          <strong>Canvas scoring:</strong> Five decision sorts and five cash-flow classifications are worth 10 points each. Your funding recommendation and safeguard are optional and unscored.
         </div>
       </section>
 
@@ -994,8 +1075,7 @@
         <button class="tab-button" id="tab-functions" type="button" role="tab" aria-selected="false" aria-controls="panel-functions" tabindex="-1">Value Over Time</button>
         <button class="tab-button" id="tab-people" type="button" role="tab" aria-selected="false" aria-controls="panel-people" tabindex="-1">Risk &amp; Governance</button>
         <button class="tab-button" id="tab-paths" type="button" role="tab" aria-selected="false" aria-controls="panel-paths" tabindex="-1">Paths &amp; Research</button>
-        <button class="tab-button" id="tab-decision" type="button" role="tab" aria-selected="false" aria-controls="panel-decision" tabindex="-1">Investment Decision</button>
-        <button class="tab-button" id="tab-practice" type="button" role="tab" aria-selected="false" aria-controls="panel-practice" tabindex="-1">Practice</button>
+        <button class="tab-button" id="tab-decision" type="button" role="tab" aria-selected="false" aria-controls="panel-decision" tabindex="-1">Decision</button>
         <button class="tab-button" id="tab-submit" type="button" role="tab" aria-selected="false" aria-controls="panel-submit" tabindex="-1" hidden>Submit</button>
       </nav>
 
@@ -1348,72 +1428,125 @@
           <h3>AI at Work: Draft the Investment Memo</h3>
           <p>AI can turn the reviewed analysis into a concise decision memo with assumptions, scenarios, and unresolved questions. Elena should require links to source evidence, recalculate every headline figure, and keep the human decision maker accountable for the recommendation.</p>
         </div>
-      </article>
 
-      <article class="tab-panel" id="panel-practice" role="tabpanel" tabindex="0" aria-labelledby="tab-practice" hidden>
-        <h2>Interactive Practice</h2>
-        <p>Complete all 10 finance decisions, then select <strong>Check My Finance Reading</strong>. You may revise and check again before submitting to Canvas.</p>
+        <h3 class="artifact-heading">Scored Decision Activities</h3>
+        <p>Complete all 10 classifications, then select <strong>Check My Finance Decisions</strong>. Each classification is worth 10 points. You may revise and check again before submitting to Canvas.</p>
 
-        <form id="practice-form" novalidate>
-          <section class="question-card" data-question="role" data-correct="separate"><h3>1. Separate the Decisions</h3><fieldset><legend>How should Maya structure the first financial analysis?</legend>
-            <label class="choice-row"><input type="radio" name="role" value="mix" required> Combine project benefits, loan interest, and reserves into one undiscounted total.</label>
-            <label class="choice-row"><input type="radio" name="role" value="separate"> Value operating cash flows first, then compare cash and debt funding.</label>
-            <label class="choice-row"><input type="radio" name="role" value="sales"> Compare projected sales with cost and ignore timing, risk, and financing.</label>
-          </fieldset></section>
+        <form id="decision-form" novalidate>
+          <section class="classification-activity" aria-labelledby="decision-sort-heading">
+            <h3 id="decision-sort-heading">1. Sort the Decisions</h3>
+            <p>Classify each question as an <strong>investment decision</strong> about whether the project creates value or a <strong>financing decision</strong> about how Copper Cup would pay for it.</p>
 
-          <section class="question-card" data-question="pv" data-correct="discounted"><h3>2. Discount a Future Benefit</h3><fieldset><legend>What is the approximate present value of $4,600 received in Year 3 at 8%?</legend>
-            <label class="choice-row"><input type="radio" name="pv" value="nominal" required> About $4,600, because the stated amount remains unchanged through Year 3.</label>
-            <label class="choice-row"><input type="radio" name="pv" value="discounted"> About $3,652, because the future amount is discounted for three years.</label>
-            <label class="choice-row"><input type="radio" name="pv" value="compounded"> About $5,794, because the future benefit should be compounded to today.</label>
-          </fieldset></section>
+            <section class="classification-row" data-question="decision_value" data-correct="investment">
+              <fieldset><legend>1. Does the full traceability system create value at the 8% discount rate?</legend>
+                <div class="category-options two-options">
+                  <label class="category-option"><input type="radio" name="decision_value" value="investment" required> Investment decision</label>
+                  <label class="category-option"><input type="radio" name="decision_value" value="financing"> Financing decision</label>
+                </div>
+                <p class="item-feedback" id="feedback-decision_value" aria-live="polite" hidden></p>
+              </fieldset>
+            </section>
 
-          <section class="question-card" data-question="npv" data-correct="positive"><h3>3. Calculate the Base-Case NPV</h3><fieldset><legend>Which result matches the full-system base case at 8%, allowing for rounding?</legend>
-            <label class="choice-row"><input type="radio" name="npv" value="negative" required> Approximately -$1,271 after subtracting discounted benefits from the initial project cost.</label>
-            <label class="choice-row"><input type="radio" name="npv" value="gross"> Approximately +$3,100 after adding nominal benefits and ignoring the time value.</label>
-            <label class="choice-row"><input type="radio" name="npv" value="positive"> Approximately +$1,271 after discounting benefits and subtracting the initial investment.</label>
-          </fieldset></section>
+            <section class="classification-row" data-question="decision_funding" data-correct="financing">
+              <fieldset><legend>2. Should Copper Cup pay cash or use the proposed three-year loan?</legend>
+                <div class="category-options two-options">
+                  <label class="category-option"><input type="radio" name="decision_funding" value="investment" required> Investment decision</label>
+                  <label class="category-option"><input type="radio" name="decision_funding" value="financing"> Financing decision</label>
+                </div>
+                <p class="item-feedback" id="feedback-decision_funding" aria-live="polite" hidden></p>
+              </fieldset>
+            </section>
 
-          <section class="question-card" data-question="interpret" data-correct="conditional"><h3>4. Interpret Positive NPV</h3><fieldset><legend>What does the positive base-case NPV support?</legend>
-            <label class="choice-row"><input type="radio" name="interpret" value="guarantee" required> The project guarantees profit because every future estimate exceeds the initial cost.</label>
-            <label class="choice-row"><input type="radio" name="interpret" value="conditional"> Estimated benefits exceed cost at 8%, conditional on the model assumptions.</label>
-            <label class="choice-row"><input type="radio" name="interpret" value="funding"> Debt is preferable because positive NPV automatically covers every loan payment.</label>
-          </fieldset></section>
+            <section class="classification-row" data-question="decision_benefits" data-correct="investment">
+              <fieldset><legend>3. Which future operating benefits belong in the project's NPV model?</legend>
+                <div class="category-options two-options">
+                  <label class="category-option"><input type="radio" name="decision_benefits" value="investment" required> Investment decision</label>
+                  <label class="category-option"><input type="radio" name="decision_benefits" value="financing"> Financing decision</label>
+                </div>
+                <p class="item-feedback" id="feedback-decision_benefits" aria-live="polite" hidden></p>
+              </fieldset>
+            </section>
 
-          <section class="question-card" data-question="financing" data-correct="liquidity"><h3>5. Compare Cash and Debt</h3><fieldset><legend>Which comparison best reflects Copper Cup's financing tradeoff?</legend>
-            <label class="choice-row"><input type="radio" name="financing" value="free" required> Debt preserves cash and removes risk because payments occur in later years.</label>
-            <label class="choice-row"><input type="radio" name="financing" value="same"> Cash and debt are equivalent because both provide the same traceability system.</label>
-            <label class="choice-row"><input type="radio" name="financing" value="liquidity"> Cash avoids interest; debt preserves liquidity but creates fixed payment obligations.</label>
-          </fieldset></section>
+            <section class="classification-row" data-question="decision_reserve" data-correct="financing">
+              <fieldset><legend>4. How much cash should remain available after Copper Cup pays for the project?</legend>
+                <div class="category-options two-options">
+                  <label class="category-option"><input type="radio" name="decision_reserve" value="investment" required> Investment decision</label>
+                  <label class="category-option"><input type="radio" name="decision_reserve" value="financing"> Financing decision</label>
+                </div>
+                <p class="item-feedback" id="feedback-decision_reserve" aria-live="polite" hidden></p>
+              </fieldset>
+            </section>
 
-          <section class="question-card" data-question="riskreturn" data-correct="compensation"><h3>6. Connect Risk and Return</h3><fieldset><legend>Why might a riskier project require a higher expected return?</legend>
-            <label class="choice-row"><input type="radio" name="riskreturn" value="compensation" required> Investors generally require compensation for bearing greater uncertainty about future outcomes.</label>
-            <label class="choice-row"><input type="radio" name="riskreturn" value="certainty"> Higher risk makes projected cash flows more certain and therefore more valuable.</label>
-            <label class="choice-row"><input type="radio" name="riskreturn" value="accounting"> Accounting rules require every uncertain project to report higher future benefits.</label>
-          </fieldset></section>
+            <section class="classification-row" data-question="decision_pilot" data-correct="investment">
+              <fieldset><legend>5. Does the smaller pilot create enough value to justify its $5,000 cost?</legend>
+                <div class="category-options two-options">
+                  <label class="category-option"><input type="radio" name="decision_pilot" value="investment" required> Investment decision</label>
+                  <label class="category-option"><input type="radio" name="decision_pilot" value="financing"> Financing decision</label>
+                </div>
+                <p class="item-feedback" id="feedback-decision_pilot" aria-live="polite" hidden></p>
+              </fieldset>
+            </section>
+          </section>
 
-          <section class="question-card" data-question="diversification" data-correct="limits"><h3>7. Apply Diversification</h3><fieldset><legend>Which statement correctly describes diversification?</legend>
-            <label class="choice-row"><input type="radio" name="diversification" value="eliminate" required> Combining assets eliminates all company, market, inflation, and economic uncertainty.</label>
-            <label class="choice-row"><input type="radio" name="diversification" value="single"> One well-researched traceability project creates a diversified business investment portfolio.</label>
-            <label class="choice-row"><input type="radio" name="diversification" value="limits"> It can reduce project-specific exposure, but broad market risk still remains.</label>
-          </fieldset></section>
+          <section class="classification-activity" aria-labelledby="cash-flow-heading">
+            <h3 id="cash-flow-heading">2. Classify the Cash Flows</h3>
+            <p>Classify each amount as a project cash inflow, a project cash outflow, or an amount that should not be included as a project operating cash flow.</p>
 
-          <section class="question-card" data-question="governance" data-correct="oversight"><h3>8. Add a Governance Control</h3><fieldset><legend>Which safeguard best addresses agency and model risk?</legend>
-            <label class="choice-row"><input type="radio" name="governance" value="vendor" required> Let the vendor approve assumptions because it understands the system best.</label>
-            <label class="choice-row"><input type="radio" name="governance" value="oversight"> Require independent formula review, documented assumptions, approval rights, and checkpoints.</label>
-            <label class="choice-row"><input type="radio" name="governance" value="confidence"> Approve the forecast when its author expresses strong confidence in every estimate.</label>
-          </fieldset></section>
+            <section class="classification-row" data-question="cash_system" data-correct="outflow">
+              <fieldset><legend>6. The $9,500 paid to the traceability-system vendor today.</legend>
+                <div class="category-options three-options">
+                  <label class="category-option"><input type="radio" name="cash_system" value="inflow" required> Project cash inflow</label>
+                  <label class="category-option"><input type="radio" name="cash_system" value="outflow"> Project cash outflow</label>
+                  <label class="category-option"><input type="radio" name="cash_system" value="not_project"> Not a project operating cash flow</label>
+                </div>
+                <p class="item-feedback" id="feedback-cash_system" aria-live="polite" hidden></p>
+              </fieldset>
+            </section>
 
-          <section class="question-card" data-question="behavior" data-correct="rules"><h3>9. Reduce Behavioral Bias</h3><fieldset><legend>Which practice best counters overconfidence and the disposition effect?</legend>
-            <label class="choice-row"><input type="radio" name="behavior" value="story" required> Focus on the strongest success story and revisit losses after implementation ends.</label>
-            <label class="choice-row"><input type="radio" name="behavior" value="rules"> Set downside scenarios, dissenting review, and stop rules before approving investment.</label>
-            <label class="choice-row"><input type="radio" name="behavior" value="sentiment"> Follow market sentiment because collective enthusiasm removes individual judgment errors.</label>
-          </fieldset></section>
+            <section class="classification-row" data-question="cash_year1" data-correct="inflow">
+              <fieldset><legend>7. The estimated $3,800 Year 1 net cash benefit caused by the system.</legend>
+                <div class="category-options three-options">
+                  <label class="category-option"><input type="radio" name="cash_year1" value="inflow" required> Project cash inflow</label>
+                  <label class="category-option"><input type="radio" name="cash_year1" value="outflow"> Project cash outflow</label>
+                  <label class="category-option"><input type="radio" name="cash_year1" value="not_project"> Not a project operating cash flow</label>
+                </div>
+                <p class="item-feedback" id="feedback-cash_year1" aria-live="polite" hidden></p>
+              </fieldset>
+            </section>
 
-          <section class="question-card" data-question="evidence" data-correct="verify"><h3>10. Audit ESG, Climate, and AI Evidence</h3><fieldset><legend>How should Maya use these inputs in the finance memo?</legend>
-            <label class="choice-row"><input type="radio" name="evidence" value="premium" required> Add an automatic sustainability premium because ESG language signals higher value.</label>
-            <label class="choice-row"><input type="radio" name="evidence" value="ignore"> Exclude climate and governance factors because they are always nonfinancial concerns.</label>
-            <label class="choice-row"><input type="radio" name="evidence" value="verify"> Link material factors to cash flow or risk, verify sources, and disclose uncertainty.</label>
-          </fieldset></section>
+            <section class="classification-row" data-question="cash_existing" data-correct="not_project">
+              <fieldset><legend>8. Latte sales Copper Cup expects to make even if it does not install the system.</legend>
+                <div class="category-options three-options">
+                  <label class="category-option"><input type="radio" name="cash_existing" value="inflow" required> Project cash inflow</label>
+                  <label class="category-option"><input type="radio" name="cash_existing" value="outflow"> Project cash outflow</label>
+                  <label class="category-option"><input type="radio" name="cash_existing" value="not_project"> Not a project operating cash flow</label>
+                </div>
+                <p class="item-feedback" id="feedback-cash_existing" aria-live="polite" hidden></p>
+              </fieldset>
+            </section>
+
+            <section class="classification-row" data-question="cash_loan" data-correct="not_project">
+              <fieldset><legend>9. The proposed loan's annual payment of about $3,753.</legend>
+                <div class="category-options three-options">
+                  <label class="category-option"><input type="radio" name="cash_loan" value="inflow" required> Project cash inflow</label>
+                  <label class="category-option"><input type="radio" name="cash_loan" value="outflow"> Project cash outflow</label>
+                  <label class="category-option"><input type="radio" name="cash_loan" value="not_project"> Not a project operating cash flow</label>
+                </div>
+                <p class="item-feedback" id="feedback-cash_loan" aria-live="polite" hidden></p>
+              </fieldset>
+            </section>
+
+            <section class="classification-row" data-question="cash_year3" data-correct="inflow">
+              <fieldset><legend>10. The estimated $4,600 Year 3 net cash benefit caused by the system.</legend>
+                <div class="category-options three-options">
+                  <label class="category-option"><input type="radio" name="cash_year3" value="inflow" required> Project cash inflow</label>
+                  <label class="category-option"><input type="radio" name="cash_year3" value="outflow"> Project cash outflow</label>
+                  <label class="category-option"><input type="radio" name="cash_year3" value="not_project"> Not a project operating cash flow</label>
+                </div>
+                <p class="item-feedback" id="feedback-cash_year3" aria-live="polite" hidden></p>
+              </fieldset>
+            </section>
+          </section>
 
           <div class="optional-box">
             <h3>Optional Take-Away Notes</h3>
@@ -1431,13 +1564,13 @@
 
           <div id="form-error" class="error-message" role="alert" tabindex="-1" hidden></div>
           <div class="controls">
-            <button id="check-practice" type="submit">Check My Finance Reading</button>
-            <button class="secondary-button" id="reset-practice" type="button">Reset</button>
+            <button id="check-decision" type="submit">Check My Finance Decisions</button>
+            <button class="secondary-button" id="reset-decision" type="button">Reset</button>
           </div>
         </form>
 
-        <section id="practice-feedback" class="feedback" aria-live="polite" tabindex="-1" hidden>
-          <h3>Finance Feedback</h3>
+        <section id="decision-feedback" class="feedback" aria-live="polite" tabindex="-1" hidden>
+          <h3>Decision Feedback</h3>
           <p id="score-line"></p>
           <div id="feedback-list"></div>
         </section>
@@ -1857,9 +1990,9 @@
         if (scormInitialized && scormAPI) scormAPI.LMSFinish("");
       });
 
-      const form = document.getElementById("practice-form");
+      const form = document.getElementById("decision-form");
       const formError = document.getElementById("form-error");
-      const practiceFeedback = document.getElementById("practice-feedback");
+      const decisionFeedback = document.getElementById("decision-feedback");
       const scoreLine = document.getElementById("score-line");
       const feedbackList = document.getElementById("feedback-list");
       const completionMessage = document.getElementById("completion-message");
@@ -1868,65 +2001,35 @@
       const submitButton = document.getElementById("submit-score");
       const submissionStatus = document.getElementById("submission-status");
       const finalScore = document.getElementById("final-score");
-      const checkButton = document.getElementById("check-practice");
-      const resetButton = document.getElementById("reset-practice");
+      const checkButton = document.getElementById("check-decision");
+      const resetButton = document.getElementById("reset-decision");
       let currentScore = 0;
-      let practiceChecked = false;
+      let decisionChecked = false;
 
-      const decisionKeys = ["role", "pv", "npv", "interpret", "financing", "riskreturn", "diversification", "governance", "behavior", "evidence"];
+      const decisionKeys = ["decision_value", "decision_funding", "decision_benefits", "decision_reserve", "decision_pilot", "cash_system", "cash_year1", "cash_existing", "cash_loan", "cash_year3"];
       const decisionTitles = {
-        role: "Investment and financing decisions",
-        pv: "Present value",
-        npv: "Net present value",
-        interpret: "NPV interpretation",
-        financing: "Cash and debt",
-        riskreturn: "Risk and expected return",
-        diversification: "Diversification",
-        governance: "Governance",
-        behavior: "Behavioral finance",
-        evidence: "ESG, climate, and AI evidence"
+        decision_value: "Project value",
+        decision_funding: "Funding method",
+        decision_benefits: "Operating benefits",
+        decision_reserve: "Cash reserve",
+        decision_pilot: "Pilot value",
+        cash_system: "Initial system cost",
+        cash_year1: "Year 1 benefit",
+        cash_existing: "Existing latte sales",
+        cash_loan: "Loan payment",
+        cash_year3: "Year 3 benefit"
       };
       const feedbackMessages = {
-        role: {
-          correct: "The project should be valued from operating cash flows before funding alternatives are compared.",
-          incorrect: "Mixing funding and operating effects can double count costs or hide the project's underlying economics."
-        },
-        pv: {
-          correct: "$4,600 divided by 1.08 cubed is approximately $3,652 in present-value terms.",
-          incorrect: "Present value discounts the Year 3 amount; it does not leave it unchanged or compound it forward."
-        },
-        npv: {
-          correct: "Discounted benefits total about $10,771, producing an NPV near +$1,271 after the initial cost.",
-          incorrect: "NPV subtracts the initial investment from discounted, incremental future cash flows."
-        },
-        interpret: {
-          correct: "Positive NPV supports investment only under the stated cash-flow, timing, rate, and project-life assumptions.",
-          incorrect: "A positive base-case NPV is conditional evidence, not a guarantee or an automatic funding decision."
-        },
-        financing: {
-          correct: "Cash avoids interest but reduces reserves; debt preserves initial liquidity while adding fixed obligations.",
-          incorrect: "The same asset does not make funding choices equivalent, and delayed payments still create risk."
-        },
-        riskreturn: {
-          correct: "A higher expected return compensates investors for accepting greater uncertainty, although realized return may differ.",
-          incorrect: "Risk does not create certainty or require forecasts to show higher accounting benefits."
-        },
-        diversification: {
-          correct: "Diversification can reduce company-specific exposure, but systematic market risk remains.",
-          incorrect: "One project is not a diversified portfolio, and diversification cannot eliminate broad economic risks."
-        },
-        governance: {
-          correct: "Independent review and documented authority make assumptions traceable and reduce agency and model risk.",
-          incorrect: "Vendor expertise and personal confidence do not replace independent oversight or documented evidence."
-        },
-        behavior: {
-          correct: "Precommitted scenarios, dissent, and stop rules counter overconfidence and reluctance to recognize losses.",
-          incorrect: "Selective stories and market enthusiasm can reinforce the very biases the process should challenge."
-        },
-        evidence: {
-          correct: "Material ESG or climate factors require a defensible cash-flow or risk mechanism, verified sources, and uncertainty disclosure.",
-          incorrect: "Neither automatic premiums nor blanket exclusion is financially disciplined; AI output also requires verification."
-        }
+        decision_value: "This is an investment decision because it asks whether the project's operating benefits justify its cost at the required return.",
+        decision_funding: "This is a financing decision because it asks how Copper Cup should obtain or use money to pay for an approved investment.",
+        decision_benefits: "This is an investment decision because incremental operating benefits determine the value created by the project itself.",
+        decision_reserve: "This is a financing decision because the required cash reserve affects whether Copper Cup should use cash, debt, or a staged funding approach.",
+        decision_pilot: "This is an investment decision because it compares the pilot's expected operating benefits with its $5,000 cost.",
+        cash_system: "The $9,500 vendor payment is a project cash outflow because Copper Cup pays it only if the full system is purchased.",
+        cash_year1: "The $3,800 Year 1 benefit is a project cash inflow because it is an additional net benefit expected from installing the system.",
+        cash_existing: "Sales expected without the system are not incremental project cash flows. Including them would overstate the project's benefits.",
+        cash_loan: "The loan payment is a financing cash flow, not a project operating cash flow. It belongs in the separate funding analysis rather than the project's operating NPV model.",
+        cash_year3: "The $4,600 Year 3 benefit is a project cash inflow because it is an additional net benefit expected from the system."
       };
 
       function selectedRadio(name) {
@@ -1941,7 +2044,7 @@
 
       function decisionResults() {
         return decisionKeys.map(name => {
-          const card = form.querySelector(`[data-question="${name}"]`);
+          const card = form.querySelector(`.classification-row[data-question="${name}"]`);
           const selected = selectedRadio(name);
           return {
             name,
@@ -1958,12 +2061,22 @@
         document.getElementById("safeguard-summary").textContent = safeguard;
       }
 
-      function invalidatePractice() {
-        if (!practiceChecked || scoreSubmitted) return;
-        practiceChecked = false;
+      function clearClassificationFeedback() {
+        form.querySelectorAll(".classification-row").forEach(row => {
+          row.classList.remove("is-correct", "needs-review");
+          const itemFeedback = row.querySelector(".item-feedback");
+          itemFeedback.hidden = true;
+          itemFeedback.textContent = "";
+        });
+      }
+
+      function invalidateDecision() {
+        if (!decisionChecked || scoreSubmitted) return;
+        decisionChecked = false;
         currentScore = 0;
-        practiceFeedback.hidden = true;
+        decisionFeedback.hidden = true;
         feedbackList.replaceChildren();
+        clearClassificationFeedback();
         reviewSubmitButton.disabled = true;
         submitTab.hidden = true;
         finalScore.textContent = "0/100";
@@ -1971,12 +2084,12 @@
         submissionStatus.textContent = "Score not yet submitted.";
         submissionStatus.className = "submission-status";
         if (submitTab.getAttribute("aria-selected") === "true") {
-          activateTab(document.getElementById("tab-practice"), false);
+          activateTab(document.getElementById("tab-decision"), false);
         }
       }
 
-      const objectiveControls = Array.from(form.querySelectorAll('.question-card input[type="radio"]'));
-      objectiveControls.forEach(control => control.addEventListener("change", invalidatePractice));
+      const objectiveControls = Array.from(form.querySelectorAll('.classification-row input[type="radio"]'));
+      objectiveControls.forEach(control => control.addEventListener("change", invalidateDecision));
 
       form.addEventListener("submit", event => {
         event.preventDefault();
@@ -1990,35 +2103,45 @@
 
         formError.hidden = true;
         feedbackList.replaceChildren();
+        clearClassificationFeedback();
         const decisions = decisionResults();
         currentScore = decisions.filter(result => result.correct).length * 10;
-        practiceChecked = true;
+        decisionChecked = true;
 
         decisions.forEach(result => {
-          const paragraph = document.createElement("p");
-          paragraph.innerHTML = `<strong>${result.title}:</strong> ${feedbackMessages[result.name][result.correct ? "correct" : "incorrect"]}`;
-          feedbackList.appendChild(paragraph);
+          const row = form.querySelector(`.classification-row[data-question="${result.name}"]`);
+          const itemFeedback = row.querySelector(".item-feedback");
+          row.classList.add(result.correct ? "is-correct" : "needs-review");
+          itemFeedback.textContent = `${result.correct ? "Correct." : "Review this classification."} ${feedbackMessages[result.name]}`;
+          itemFeedback.hidden = false;
         });
 
-        scoreLine.innerHTML = `<strong>Practice score: ${currentScore} out of 100.</strong> This score has not been submitted to Canvas.`;
+        const decisionSummary = document.createElement("p");
+        decisionSummary.innerHTML = "<strong>Decision sort:</strong> Investment decisions evaluate whether operating benefits justify a project's cost. Financing decisions focus on how the business pays and protects liquidity.";
+        feedbackList.appendChild(decisionSummary);
+        const cashFlowSummary = document.createElement("p");
+        cashFlowSummary.innerHTML = "<strong>Cash-flow classification:</strong> Project NPV uses incremental operating cash flows. Existing activity and loan payments stay outside that operating model.";
+        feedbackList.appendChild(cashFlowSummary);
+
+        scoreLine.innerHTML = `<strong>Decision score: ${currentScore} out of 100.</strong> This score has not been submitted to Canvas.`;
         finalScore.textContent = `${currentScore}/100`;
-        practiceFeedback.hidden = false;
+        decisionFeedback.hidden = false;
         reviewSubmitButton.disabled = false;
         submitTab.hidden = false;
         completionMessage.innerHTML = `All 10 objective checks are complete. Your current score is <strong><span id="practice-score">${currentScore}</span> out of 100</strong>. Review your results before completing the required Canvas submission step.`;
         updateOptionalSummary();
-        practiceFeedback.focus();
+        decisionFeedback.focus();
       });
 
       reviewSubmitButton.addEventListener("click", () => {
-        if (!practiceChecked) return;
+        if (!decisionChecked) return;
         updateOptionalSummary();
         activateTab(submitTab, true);
         document.getElementById("panel-submit").scrollIntoView({ block: "start" });
       });
 
       submitButton.addEventListener("click", () => {
-        if (!practiceChecked) return;
+        if (!decisionChecked) return;
         const result = submitToCanvas(currentScore);
         submissionStatus.textContent = result.message;
         submissionStatus.className = `submission-status${result.sent ? " success" : ""}`;
@@ -2034,11 +2157,12 @@
 
       resetButton.addEventListener("click", () => {
         form.reset();
-        practiceChecked = false;
+        decisionChecked = false;
         currentScore = 0;
         formError.hidden = true;
-        practiceFeedback.hidden = true;
+        decisionFeedback.hidden = true;
         feedbackList.replaceChildren();
+        clearClassificationFeedback();
         reviewSubmitButton.disabled = true;
         submitTab.hidden = true;
         finalScore.textContent = "0/100";
@@ -2051,7 +2175,7 @@
         const recommendation = document.getElementById("funding-recommendation").value || "No funding path selected.";
         const safeguard = document.getElementById("safeguard-note").value.trim() || "No note entered.";
         document.getElementById("print-score").textContent = `${currentScore} out of 100`;
-        document.getElementById("print-checked").textContent = practiceChecked ? "10 of 10" : "0 of 10";
+        document.getElementById("print-checked").textContent = decisionChecked ? "10 of 10" : "0 of 10";
         document.getElementById("print-submission").textContent = scoreSubmitted ? "Confirmed" : "Not confirmed";
         document.getElementById("print-recommendation").textContent = recommendation;
         document.getElementById("print-safeguard").textContent = safeguard;
@@ -2061,7 +2185,7 @@
         printResults.replaceChildren();
         results.forEach(result => {
           const item = document.createElement("li");
-          item.textContent = `${result.title}: ${practiceChecked ? (result.correct ? "Correct" : "Review recommended") : "Not checked"}`;
+          item.textContent = `${result.title}: ${decisionChecked ? (result.correct ? "Correct" : "Review recommended") : "Not checked"}`;
           printResults.appendChild(item);
         });
       }
